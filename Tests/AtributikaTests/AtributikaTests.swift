@@ -711,11 +711,16 @@ class AtributikaTests: XCTestCase {
     }
 
     // sut should not encounter infinity loop when using ampersand or less than symbol character with diacritic
-    func testAmpersandOrLessThanSymbolCharacterWithDiacritic() {
-        let actual = "Hello &️ World <️ Good".detectTags()
-        XCTAssertEqual(actual.string, "Hello &️ World <️ Good")
+    func testAmpersandOrLessThanSymbolCharacterWithDiacritic2() {
+        let actual = "<font color=\"red-500\">Hello &️ World</font>".detectTags()
+        XCTAssertEqual(actual.string, "Hello &️ World")
     }
-    
+
+    // sut should not encounter infinity loop when using ampersand or less than symbol character with diacritic
+    func testInfiniteLoop2() {
+        let actual = "<font color=\"red-500\">| 🇬🇬🇬🇬🇬🇬</font>".detectTags()
+        XCTAssertEqual(actual.string, "| 🇬🇬🇬🇬🇬🇬")
+    }
 }
 
 

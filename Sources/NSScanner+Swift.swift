@@ -36,15 +36,15 @@ extension Scanner {
         return nil
     }
 
-    /// Returns the given string if scanned, or `nil` if not found.
-    @discardableResult func scanString(_ str: String, options: NSString.CompareOptions) -> String? {
-        let scanRange = NSRange(location: self.scanLocation, length: str.count)
-        guard scanRange.location + str.count <= self.string.count else { return nil }
+    @discardableResult func scanString(_ str: NSString, options: NSString.CompareOptions) -> String? {
+        let scanRange = NSRange(location: self.scanLocation, length: str.length)
+        let string = self.string as NSString
+        guard scanRange.location + str.length <= string.length else { return nil }
 
-        let scanned = (self.string as NSString).substring(with: scanRange)
-        if (scanned.compare(str, options: options, range: nil, locale: nil) == .orderedSame) {
-            self.scanLocation += str.count
-            return str
+        let scanned = string.substring(with: scanRange)
+        if (scanned.compare(str as String, options: options, range: nil, locale: nil) == .orderedSame) {
+            self.scanLocation += str.length
+            return str as String
         } else {
             return nil
         }

@@ -102,12 +102,10 @@ extension String {
         var tagsStack = [(Tag, Int, Int)]()
         
         while !scanner.isAtEnd {
-            
             if let textString = scanner.scanUpToCharacters(from: CharacterSet(charactersIn: "<&")) {
                 resultString.append(textString)
             } else {
                 if scanner.scanString("<", options: .diacriticInsensitive) != nil {
-                    
                     if scanner.isAtEnd {
                         resultString.append("<")
                     } else {
